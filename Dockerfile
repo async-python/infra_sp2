@@ -1,7 +1,7 @@
 FROM python:3.9-slim
-RUN mkdir /code && mkdir /code/static && mkdir /code/media && python -m pip install --upgrade pip
-COPY requirements.txt /code
-RUN pip install -r /code/requirements.txt
-COPY . /code
 WORKDIR /code
+RUN mkdir static && mkdir media && python -m pip install --upgrade pip
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
 CMD gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
